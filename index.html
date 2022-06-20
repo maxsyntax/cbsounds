@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
+  <title>Chaturbate Tip Sounds</title>
+  <style type="text/css">
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #111;
+    }
+
+    .button {
+      display: inline-block;
+      vertical-align:middle;
+      text-decoration: none;
+      width: 100px;
+      height: 100px;
+      background-color: #f77fbe;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px 0;
+      line-height: 20px;
+      margin-bottom: 4px;
+      /* border-radius: 8px; */
+      border: 1px solid #f77fbe;
+      font-size: 1em;
+    }
+
+    .button:active {
+      transform: scale(0.98);
+      background-color: #f77fbe7F;
+      border: 1px solid #f77fbe7F;
+    }
+
+    .unlock {
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      margin: 16px;
+      background-image: url(mute.png);
+      background-size: 32px 32px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .buttons {
+      display: block;
+      margin: auto;
+      margin-top: 100px;
+      width: 308px;
+    }
+  </style>
+</head>
+<body>
+  <audio id="tiny"    src="clips/tiny.mp3"    type="audio/mpeg" preload="auto"></audio>
+  <audio id="small"   src="clips/small.mp3"   type="audio/mpeg" preload="auto"></audio>
+  <audio id="medium"  src="clips/medium.mp3"  type="audio/mpeg" preload="auto"></audio>
+  <audio id="large"   src="clips/large.mp3"   type="audio/mpeg" preload="auto"></audio>
+  <audio id="huge"    src="clips/huge.mp3"    type="audio/mpeg" preload="auto"></audio>
+
+  <script type="text/javascript">
+    var context = undefined;
+    const buffers = {};
+
+    const unmute = async () => {
+      document.getElementById('unmute').style.backgroundImage = "url(unmute.png)";
+
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      context = new AudioContext(); // Make it crossbrowser
+      const gainNode = context.createGain();
+      gainNode.gain.value = 0.66; // Set volume to 66%
+
+      const clips = document.getElementsByTagName('audio');
+
+      for (const clip of clips) {
+        const { id, src } = clip;
+        buffers[id] = void 0;
+        const buffer = await window.fetch(src)
+                                    .then(resp => resp.arrayBuffer());
+
+        context.decodeAudioData(buffer,
+          audioBuffer => {
+            console.log(id, src);
+            buffers[id] = audioBuffer;
+          },
+          error => console.error(error)
+        )
+      }
+    };
+
+    const playClip = clip => {
+      console.log(clip);
+      console.log(buffers);
+      play(buffers[clip]);
+    }
+
+    const play = (buffer) => {
+      const source = context.createBufferSource();
+      source.buffer = buffer;
+      source.connect(context.destination);
+      source.start();
+    };
+  </script>
+
+  <button id="unmute" class="button unlock" href="#" onClick="unmute();"></button>
+
+  <div class="buttons">
+    <button class="button" href="#" onClick="playClip('tiny');">Single</button>
+    <button class="button" href="#" onClick="playClip('small');">Few</button>
+    <button class="button" href="#" onClick="playClip('medium');">Some</button>
+    <button class="button" href="#" onClick="playClip('large');">Many</button>
+    <button class="button" href="#" onClick="playClip('huge');">Lots</button>
+  </div>
+</body>
+</html>
