@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chaturbate Tip Sounds</title>
+  <style type="text/css">
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #111;
+    }
+
+    .button {
+      display: inline-block;
+      vertical-align:middle;
+      text-decoration: none;
+      width: 100px;
+      height: 100px;
+      background-color: #f77fbe;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px 0;
+      line-height: 20px;
+      margin-bottom: 4px;
+      /* border-radius: 8px; */
+      border: 1px solid #f77fbe;
+      font-size: 1em;
+    }
+
+    .button:active {
+      transform: scale(0.98);
+      background-color: #f77fbe7F;
+      border: 1px solid #f77fbe7F;
+    }
+
+    .buttons {
+      display: block;
+      margin: auto;
+      margin-top: 100px;
+      width: 308px;
+    }
+  </style>
+</head>
+<body>
+  <audio id="tiny"    src="clips/tiny.mp3"    type="audio/mpeg" preload="auto"></audio>
+  <audio id="small"   src="clips/small.mp3"   type="audio/mpeg" preload="auto"></audio>
+  <audio id="medium"  src="clips/medium.mp3"  type="audio/mpeg" preload="auto"></audio>
+  <audio id="large"   src="clips/large.mp3"   type="audio/mpeg" preload="auto"></audio>
+  <audio id="huge"    src="clips/huge.mp3"    type="audio/mpeg" preload="auto"></audio>
+
+  <script type="text/javascript">
+    // (async () => {
+    //   const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    //   const clips = document.getElementsByTagName('audio');
+    //   const players = [];
+
+    //   for (var clip of clips) {
+    //     const data_buf = await fetch(clip.src).then( resp => resp.arrayBuffer() );
+    //     const audio_buf = await ctx.decodeAudioData(data_buf);
+
+    //     // document.querySelector("button").onclick = (evt) => {
+    //       // evt.preventDefault();
+    //       const source = ctx.createBufferSource();
+    //       source.buffer = audio_buf;
+    //       players.push({ clip: clip.id, source });
+
+    //       // source.connect(ctx.destination);
+    //       // source.start(0);
+    //     // }
+    //   }
+    // })();
+
+    const play = (clip) => {
+      const player = document.getElementById(clip);
+
+      player.volume = 0.66;
+      player.pause();
+      player.currentTime = 0;
+      player.play();
+    }
+  </script>
+
+  <div class="buttons">
+    <button class="button" href="#" onClick="play('tiny');">Single</button>
+    <button class="button" href="#" onClick="play('small');">Few</button>
+    <button class="button" href="#" onClick="play('medium');">Some</button>
+    <button class="button" href="#" onClick="play('large');">Many</button>
+    <button class="button" href="#" onClick="play('huge');">Lots</button>
+  </div>
+</body>
+</html>
